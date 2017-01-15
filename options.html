@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Options for Strava Feed Filter extension</title>
+        <style type="text/css">
+        body {
+            padding: 1em 5em;
+            background: #eee;
+        }
+        body,select,input,button {
+            font-family: sans-serif;
+            font-size: 14pt;
+        }
+        footer {
+            margin-top: 3em;
+            font-size: 0.8em;
+        }
+
+        label.checker {
+            display: block;
+            margin-bottom: 0.5em;
+        }
+        </style>
+    </head>
+    <body>
+
+        <heading>
+            <img src="strava2-f1.128px.png" />
+        </heading>
+
+        <h1>Options for Strava Feed Filter extension</h1>
+
+        <p>This extension will hide commute and virtual (trainer) activities from your
+        personal <a href="https://www.strava.com/" target="_blank">Strava</a> activity feed page.</p>
+
+        <p>
+            Action to take:
+            <select id="action">
+             <option value="fade">Fade out</option>
+             <option value="hide">Hide completely</option>
+            </select>
+        </p>
+
+        <p>
+            <label class="checker">
+              <input type="checkbox" id="hide_commute" />
+              Hide commute activities
+            </label>
+
+            <label class="checker">
+              <input type="checkbox" id="hide_virtual" />
+              Hide virtual activities
+            </label>
+        </p>
+
+        <p>
+            <button id="save">Save settings</button> <span id="status"></div>
+        </p>
+
+        <footer>
+            <p>Vote for real feed filtering <a href="https://support.strava.com/hc/en-us/community/posts/208834647-Options-to-filter-and-sort-the-Dashboard-Feed-on-Strava" target="_blank">here</a>.</p>
+        </footer>
+
+        <script src="options.js"></script>
+
+    </body>
+</html>
