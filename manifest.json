@@ -12,6 +12,10 @@
   "icons": { "128": "strava2-f1.128px.png" },
 
   "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
 
   "content_scripts": [ {
     "js": [
