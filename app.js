@@ -31,6 +31,29 @@
     }
   };
 
+  var isShortCycle = function($activity, minMiles) {
+    if($activity.find('.icon-ride').length > 0) {
+      var $stats = $activity.find('.list-stats .stat');
+      for(var i = 0; i < $stats.length; i++) {
+        var $stat = $( $stats[i] );
+        if($stat.find('.stat-subtext').text().toLowerCase().indexOf('distance') >= 0) {
+          var unit = $stat.find('.unit').text().toLowerCase();
+          var dist = $stat.find('.stat-text').text().toLowerCase();
+          var distNum = parseFloat(dist.substring(0, dist.length - unit.length));
+          if(unit == 'km') {
+            distNum *= 0.621371
+          }
+          if(unit == 'km' || unit == 'mi' || unit.indexOf('mile') == 0) {
+            if(distNum < minMiles) {
+              return true
+            }
+          }
+        }
+      }
+    }
+    return false;
+  };
+
   var mark = function($activity, action) {
     if(action == 'hide') {
       $activity.hide();
@@ -71,6 +94,11 @@
         log("Challenge activity hidden");
       }
 
+      if(options.hideShortCycle > 0 && isShortCycle( $(this), options.hideShortCycle )) {
+        mark( $(this), options.action );
+        log("Short cycle activity hidden");
+      }
+
     });
 
     //$('.pagination a.load-feed').last().on('click', function() {
@@ -84,6 +112,7 @@
     hideCommute: true,
     hideVirtual: true,
     hideChallenge: false,
+    hideShortCycle: 0,
   };
 
   var options = defaultOptions;

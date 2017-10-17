@@ -6,12 +6,14 @@ function save_options() {
   var hideCommute = document.getElementById('hide_commute').checked;
   var hideVirtual = document.getElementById('hide_virtual').checked;
   var hideChallenge = document.getElementById('hide_challenge').checked;
+  var hideShortCycle = document.getElementById('hide_short_cycle').selectedOptions[0].value;
 
   chrome.storage.sync.set({
     action: action,
     hideCommute: hideCommute,
     hideVirtual: hideVirtual,
     hideChallenge: hideChallenge,
+    hideShortCycle: hideShortCycle,
   }, function() {
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
@@ -29,13 +31,28 @@ function restore_options() {
     hideCommute: true,
     hideVirtual: true,
     hideChallenge: false,
+    hideShortCycle: 0,
   }, function(items) {
     document.getElementById('action').value = items.action;
     document.getElementById('hide_commute').checked = items.hideCommute;
     document.getElementById('hide_virtual').checked = items.hideVirtual;
     document.getElementById('hide_challenge').checked = items.hideChallenge;
+    var csSel = document.getElementById('hide_short_cycle');
+    setSelected(csSel, items.hideShortCycle)
   });
 }
+
+// set value for a select element
+function setSelected(sel, val) {
+  var opts = sel.options;
+  for(var i = 0; i < opts.length; i++) {
+    if(opts[i].value == val) {
+      sel.selectedIndex = i;
+      return;
+    }
+  }
+}
+
 
 document.addEventListener('DOMContentLoaded', restore_options);
 
