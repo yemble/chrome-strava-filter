@@ -3,7 +3,7 @@
 
   "name": "Strava feed filter",
   "description": "Hide virtual rides and commutes from Activity Feed.",
-  "version": "2.0.0",
+  "version": "2.1.0",
 
   "permissions": [
     "storage"
