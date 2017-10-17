@@ -2,8 +2,8 @@
   "manifest_version": 2,
 
   "name": "Strava feed filter",
-  "description": "Hide virtual rides and commutes from Activity Feed.",
-  "version": "2.1.0",
+  "description": "Hide virtual rides, commutes and other cruft from Activity Feed.",
+  "version": "2.1.1",
 
   "permissions": [
     "storage"

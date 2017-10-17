@@ -37,22 +37,34 @@
       for(var i = 0; i < $stats.length; i++) {
         var $stat = $( $stats[i] );
         if($stat.find('.stat-subtext').text().toLowerCase().indexOf('distance') >= 0) {
-          var unit = $stat.find('.unit').text().toLowerCase();
-          var dist = $stat.find('.stat-text').text().toLowerCase();
-          var distNum = parseFloat(dist.substring(0, dist.length - unit.length));
-          if(unit == 'km') {
-            distNum *= 0.621371
-          }
-          if(unit == 'km' || unit == 'mi' || unit.indexOf('mile') == 0) {
-            if(distNum < minMiles) {
-              return true
-            }
+          var $value = $stat.find('.stat-text');
+          if(isShortDistance($value, minMiles)) {
+            return true;
           }
         }
+      }
+      var $distance = $activity.find('.list-stats li[title="Distance"]');
+      if(isShortDistance($distance, minMiles)) {
+        return true;
       }
     }
     return false;
   };
+
+  var isShortDistance = function($value, minMiles) {
+    var unit = $value.find('.unit').text().toLowerCase();
+    var raw = $value.text().toLowerCase();
+    var miles = parseFloat(raw.substring(0, raw.length - unit.length));
+    if(unit == 'km') {
+      miles *= 0.621371
+    }
+    if(unit == 'km' || unit == 'mi' || unit.indexOf('mile') == 0) {
+      if(miles < minMiles) {
+        return true
+      }
+    }
+    return false;
+  }
 
   var mark = function($activity, action) {
     if(action == 'hide') {
