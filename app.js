@@ -22,6 +22,15 @@
     }
   };
 
+  var isChallenge = function($activity) {
+    if($activity.hasClass('challenge') || $activity.find('.challenge-image, .btn-join-challenge').length > 0) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  };
+
   var mark = function($activity, action) {
     if(action == 'hide') {
       $activity.hide();
@@ -38,7 +47,7 @@
       return;
     }
 
-    // log("Filtering now");
+    //log("Filtering now");
 
     $('.feed .feed-entry').each(function () {
       // this doesn't actually work, classes are reset on pagination
@@ -57,6 +66,11 @@
         log("Virtual activity hidden");
       }
 
+      if(options.hideChallenge && isChallenge( $(this) )) {
+        mark( $(this), options.action );
+        log("Challenge activity hidden");
+      }
+
     });
 
     //$('.pagination a.load-feed').last().on('click', function() {
@@ -69,6 +83,7 @@
     action: 'fade',
     hideCommute: true,
     hideVirtual: true,
+    hideChallenge: false,
   };
 
   var options = defaultOptions;
