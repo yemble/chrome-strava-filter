@@ -60,17 +60,36 @@
               Hide challenge activities
             </label>
 
+            <label class="checker" for="showPhoto">
+              <input type="checkbox" id="showPhoto" />
+              Always show activities with photos
+            </label>
+
             <span class="select">
-              Bike rides less than <select id="hide_short_cycle">
+              <label for="showLongCycle">Always show rides over</label>
+              <select id="showLongCycle">
                 <option>0</option>
+                <option>20</option>
+                <option>50</option>
+                <option>100</option>
+                <option>120</option>
+                <option>150</option>
+                <option>200</option>
+              </select> miles
+            </span>
+
+            <span class="select">
+              <label for="autoPage">Auto load</label>
+              <select id="autoPage">
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
                 <option>3</option>
+                <option>4</option>
                 <option>5</option>
                 <option>10</option>
-                <option>15</option>
-                <option>20</option>
-                <option>40</option>
-              </select> miles
-            </select>
+              </select> more pages
+            </span>
         </p>
 
         <p>
