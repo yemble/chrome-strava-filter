@@ -27,10 +27,13 @@
     else if($activity.html().indexOf('virtualride') >= 0) {
       return true;
     }
-    else if($activity.html().indexOf('on TrainerRoad') >= 0) {
+    else if($activity.find('.enhanced-tag').text().indexOf('TrainerRoad') >= 0) {
       return true;
     }
     else if($activity.find('.enhanced-tag').text().indexOf('Peloton') >= 0) {
+      return true;
+    }
+    else if($activity.find('.enhanced-tag').text().indexOf('FitBod') >= 0) {
       return true;
     }
     else {
@@ -53,7 +56,7 @@
       for(var i = 0; i < $stats.length; i++) {
         var $stat = $( $stats[i] );
         if($stat.find('.stat-subtext').text().toLowerCase().indexOf('distance') >= 0) {
-          var $value = $stat.find('.stat-text'); log("distance? " + $value.text(), $activity);
+          var $value = $stat.find('.stat-text'); //log("distance? " + $value.text(), $activity);
           if(isLongDistance($value, minMiles)) {
             return true;
           }
@@ -101,11 +104,6 @@
     log("Filtering now");
 
     $('.feed > .feed-entry').each(function () {
-      if(options.hideCommute && isCommute( $(this) )) {
-        mark( $(this), options.action );
-        log("Commute activity hidden", $(this));
-      }
-
       if(options.hideVirtual && isVirtual( $(this) )) {
         mark( $(this), options.action );
         log("Virtual activity hidden", $(this));
@@ -124,6 +122,11 @@
       if(options.showLongCycle > 0 && isLongCycle( $(this), options.showLongCycle )) {
         log("Long cycle activity, skipping other tests", $(this));
         return;
+      }
+
+      if(options.hideCommute && isCommute( $(this) )) {
+        mark( $(this), options.action );
+        log("Commute activity hidden", $(this));
       }
 
       // this doesn't actually work, classes are reset on pagination
